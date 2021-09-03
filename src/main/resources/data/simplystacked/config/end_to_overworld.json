@@ -1,0 +1,8 @@
+{
+    "from": "minecraft:the_end",
+    "to": "minecraft:overworld",
+    "from_y_min": -5,
+    "from_y_max": 5,
+    "to_y": 253,
+    "cloud_platform": true
+}

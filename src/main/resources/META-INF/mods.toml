@@ -1,0 +1,26 @@
+license = "MIT"
+loaderVersion = "[36,)"
+modLoader = "javafml"
+[[mods]]
+displayName = "Simply Stacked Dimensions"
+modId = "simplystacked"
+version = "1.16.5"
+logoFile = ""
+displayURL = ""
+authors = "shiroroku(elise)"
+credits = "amo"
+description = '''
+Teleports players to and from dimensions at specific Y levels!
+'''
+[[dependencies.simplystacked]]
+mandatory = true
+modId = "forge"
+ordering = "NONE"
+side = "BOTH"
+versionRange = "[36,)"
+[[dependencies.simplystacked]]
+mandatory = true
+modId = "minecraft"
+ordering = "NONE"
+side = "BOTH"
+versionRange = "[1.16.5,1.17)"
