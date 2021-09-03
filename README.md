@@ -27,3 +27,4 @@ The example config for teleporting the player to the nether when at Y level -10 
 ### Additional Info:
 - Clouds are blocks that can be spawned below the teleport destination to keep the player from falling back down. They will disappear over time.
 - Teleporting does not modify X and Z values, so nether distance per overworld block is not preserved.
+- Teleport cooldown can be changed in Common Config, by default its three seconds (60 ticks).
