@@ -1,7 +1,7 @@
 Adds data options for teleporting players to and from different dimensions when at specific Y levels!
 
 ### Dimension Config:
-Default config teleports the player to the nether when at bedrock, and to the end when at max build height.
+There are no config files by default and running the mod without adding one wont change the game.
 
 The example config for teleporting the player to the nether when at Y level -10 to 1:
 ```json
@@ -14,6 +14,8 @@ The example config for teleporting the player to the nether when at Y level -10 
     "cloud_platform": true
 }
 ```
+
+This file can be named whatever as long as its a JSON in the mods config data folder (/data/simplystacked/config/)
 
 | Key | Value | Description |
 | --- | --- | --- |
