@@ -19,9 +19,9 @@ public class CommonConfig {
 		commonBuilder.pop();
 
 		commonBuilder.push("Allow Sneak");
-		ALLOW_SNEAK = commonBuilder.comment("Whether sneaking doubles the amount of time it takes to switch dimensions").define("allow_sneak", true);
+		ALLOW_SNEAK = commonBuilder.comment("Whether sneaking halves the amount of time it takes to switch dimensions").define("allow_sneak", true);
 		commonBuilder.pop();
-		
+
 		COMMONCONFIG = commonBuilder.build();
 	}
 }
