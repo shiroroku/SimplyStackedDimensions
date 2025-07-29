@@ -29,7 +29,14 @@ public class TeleportHandler {
             return;
         }
 
-        updateCooldownCache();
+        //updateCooldownCache();
+        int amountToLower = 1;
+
+        if (CommonConfig.ALLOW_SNEAK.get() && entity.isShiftKeyDown()) {
+            amountToLower = 2;
+        }
+
+        updatePlayerCooldownCache(entity.getUUID(), amountToLower);
 
         if (!entity.canChangeDimensions()) {
             return;
@@ -81,10 +88,17 @@ public class TeleportHandler {
      */
     private static void updateCooldownCache() {
         for (Map.Entry<UUID, Integer> entry : cooldownCache.entrySet()) {
-            if (entry.getValue() <= 0) {
-                cooldownCache.remove(entry.getKey());
+            updatePlayerCooldownCache(entry.getKey(),1);
+        }
+    }
+
+    private static void updatePlayerCooldownCache(UUID uuid, int amountToLower) {
+        if (cooldownCache.containsKey(uuid)) {
+            int val = cooldownCache.getOrDefault(uuid, 0);
+            if (val <= 0) {
+               cooldownCache.remove(uuid);
             } else {
-                cooldownCache.put(entry.getKey(), entry.getValue() - 1);
+                cooldownCache.put(uuid, val - amountToLower);
             }
         }
     }
