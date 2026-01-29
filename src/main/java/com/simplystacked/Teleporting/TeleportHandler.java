@@ -80,11 +80,14 @@ public class TeleportHandler {
      * Updates all entries in the cooldown cache. Decrements the cooldown value. Removes entries with 0 cooldown.
      */
     private static void updateCooldownCache() {
-        for (Map.Entry<UUID, Integer> entry : cooldownCache.entrySet()) {
-            if (entry.getValue() <= 0) {
-                cooldownCache.remove(entry.getKey());
+        Iterator<Map.Entry<UUID, Integer>> it = cooldownCache.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<UUID, Integer> entry = it.next();
+            int value = entry.getValue() - 1;
+            if (value <= 0) {
+                it.remove();
             } else {
-                cooldownCache.put(entry.getKey(), entry.getValue() - 1);
+                entry.setValue(value);
             }
         }
     }
