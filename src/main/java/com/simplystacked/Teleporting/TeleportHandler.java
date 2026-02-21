@@ -14,8 +14,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.UUID;
 
 public class TeleportHandler {
@@ -30,7 +28,7 @@ public class TeleportHandler {
             return;
         }
 
-        updateCooldownCache();
+        updateCooldownCache(entity);
 
         if (!entity.canChangeDimensions()) {
             return;
@@ -78,17 +76,20 @@ public class TeleportHandler {
     }
 
     /**
-     * Updates all entries in the cooldown cache. Decrements the cooldown value. Removes entries with 0 cooldown.
+     * Updates given entity in the cooldown cache. Decrements the cooldown value. Removes entries with 0 cooldown.
      */
-    private static void updateCooldownCache() {
-        Iterator<Map.Entry<UUID, Integer>> it = cooldownCache.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<UUID, Integer> entry = it.next();
-            int value = entry.getValue() - 1;
-            if (value <= 0) {
-                it.remove();
+    private static void updateCooldownCache(LivingEntity entity) {
+        UUID uuid = entity.getUUID();
+        int amountToLower = 1;
+        if (CommonConfig.ALLOW_SNEAK.get() && entity.isShiftKeyDown()) {
+            amountToLower = 2;
+        }
+        if (cooldownCache.containsKey(uuid)) {
+            int val = cooldownCache.getOrDefault(uuid, 0);
+            if (val <= 0) {
+                cooldownCache.remove(uuid);
             } else {
-                entry.setValue(value);
+                cooldownCache.put(uuid, val - amountToLower);
             }
         }
     }
