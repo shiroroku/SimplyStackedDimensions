@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
@@ -87,6 +88,12 @@ public class TeleportHandler {
      * Updates all entries in the cooldown cache. Decrements the cooldown value. Removes entries with 0 cooldown.
      */
     private static void updateCooldownCache() {
+        Iterator<Map.Entry<UUID, Integer>> it = cooldownCache.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<UUID, Integer> entry = it.next();
+            int value = entry.getValue() - 1;
+            if (value <= 0) {
+                it.remove();
         for (Map.Entry<UUID, Integer> entry : cooldownCache.entrySet()) {
             updatePlayerCooldownCache(entry.getKey(),1);
         }
@@ -98,6 +105,7 @@ public class TeleportHandler {
             if (val <= 0) {
                cooldownCache.remove(uuid);
             } else {
+                entry.setValue(value);
                 cooldownCache.put(uuid, val - amountToLower);
             }
         }
