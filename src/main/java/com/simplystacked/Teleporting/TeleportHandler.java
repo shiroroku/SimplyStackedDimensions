@@ -55,6 +55,7 @@ public class TeleportHandler {
                     if (serverWorld != null) {
 
                         //Teleport entity and set cooldown
+                        if (CommonConfig.RESET_FALL_DISTANCE.get()) entity.resetFallDistance();
                         cooldownCache.put(entity.getUUID(), CommonConfig.TELEPORT_COOLDOWN.get());
                         entity.changeDimension(serverWorld, new DimensionTeleporter(setting));
                         BlockPos tplocation = new BlockPos(entity.getBlockX(), setting.getToY(), entity.getBlockZ());
